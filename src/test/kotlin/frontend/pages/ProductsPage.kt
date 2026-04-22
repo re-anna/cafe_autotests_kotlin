@@ -17,8 +17,8 @@ data class ProductData(
 )
 
 class ProductsPage {
-    val title: SelenideElement get() = element(byDataTestId("products-title"))
-    val cards: ElementsCollection get() = elements(byDataTestGroup("product-card"))
+    private val title: SelenideElement get() = element(byDataTestId("products-title"))
+    private val cards: ElementsCollection get() = elements(byDataTestGroup("product-card"))
 
     fun getTitle(): String = title.text.trim()
 
