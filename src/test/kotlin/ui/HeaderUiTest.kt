@@ -18,7 +18,7 @@ class HeaderUiTest : BaseUiTest() {
         actual shouldBe expected
     }
 
-    //TODO Дописать тест, после того, как подниму бэк на докере
+    //TODO Дописать тест
 //    @Test
 //    @DisplayName("Check header titles open exact pages")
 //    fun checkHeaderNavigation(){
