@@ -17,8 +17,10 @@ data class ProductData(
 )
 
 class ProductsPage {
-    val txtTitle: SelenideElement get() = element(byDataTestId("products-title"))
-    val listCards: ElementsCollection get() = elements(byDataTestGroup("product-card"))
+    val title: SelenideElement get() = element(byDataTestId("products-title"))
+    val cards: ElementsCollection get() = elements(byDataTestGroup("product-card"))
+
+    fun getTitle(): String = title.text.trim()
 
     fun productName(card: SelenideElement) = card.find(byDataTestGroup("product-card-name"))
     fun productDescription(card: SelenideElement) = card.find(byDataTestGroup("product-card-description"))
@@ -30,20 +32,10 @@ class ProductsPage {
         return this
     }
 
-    @Step("Get products page title")
-    fun getTitle(): String = txtTitle.text.trim()
-
-    @Step("Get products list from page")
-    fun getProductsNames(): List<String> {
-        val names = elements(byDataTestGroup("product-card-name"))
-        names.shouldHave(sizeGreaterThan(0))
-        return names.map {it.text.trim()}
-    }
-
     @Step ("Get products information")
     fun getProductsInfo(): List<ProductData> {
-        listCards.shouldHave(sizeGreaterThan(0))
-        return listCards.map { card ->
+        cards.shouldHave(sizeGreaterThan(0))
+        return cards.map { card ->
             ProductData(
                 name = productName(card).text.trim(),
                 description = productDescription(card).text.trim(),

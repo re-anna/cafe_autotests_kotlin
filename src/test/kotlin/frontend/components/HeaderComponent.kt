@@ -7,11 +7,13 @@ import frontend.pages.ProductsPage
 import io.qameta.allure.Step
 
 class HeaderComponent {
-    private val linksHeader: ElementsCollection = elements(byDataTestGroup("nav-link"))
+    private val links: ElementsCollection = elements(byDataTestGroup("nav-link"))
+
+    fun getLinksText(): List<String> = links.map {it.text.trim()}
 
     @Step("Click on {name} link")
     fun clickLink(name: String):HeaderComponent{
-        linksHeader.first{ it.text.trim() == name }.click()
+        links.first{ it.text.trim() == name }.click()
         return this
     }
 
