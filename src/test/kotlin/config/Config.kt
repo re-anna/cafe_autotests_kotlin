@@ -1,9 +1,8 @@
-package org.example.config
+package config
 
 import java.util.Properties
 
 object Config {
-    private const val DEFAULT_PROP_FILE = "/example.properties"
 
     data class Props(
         val browserName: String,
@@ -12,9 +11,12 @@ object Config {
         val backendUrl: String,
         val backendApiVersion: String,
         val moonHost: String,
+        val runRemote: Boolean,
     )
 
-    val props: Props by lazy {
+    private const val DEFAULT_PROP_FILE = "/example.properties"
+    
+    val get: Props by lazy {
         val fileName = System.getProperty("env_config") ?: DEFAULT_PROP_FILE
 
         val properties = Properties().apply {
@@ -27,12 +29,12 @@ object Config {
             getProperty(key) ?: error("Необходимый конфиг '$key' не найден в '$fileName'")
 
         Props(
-            browserName = properties.getProperty("browser.name"),
-            browserVersion = properties.getProperty("browser.version"),
-            frontendUrl = properties.getProperty("frontend.url"),
-            backendUrl = properties.getProperty("backend.url"),
-            backendApiVersion = properties.getProperty("backend.api.version"),
-            moonHost = properties.getProperty("moon.host")
-        )
+            browserName = properties.required("browser.name"),
+            browserVersion = properties.required("browser.version"),
+            frontendUrl = properties.required("frontend.url"),
+            backendUrl = properties.required("backend.url"),
+            backendApiVersion = properties.required("backend.api.version"),
+            moonHost = properties.required("moon.host"),
+            runRemote = properties.required("run.remote").toBoolean())
     }
 }

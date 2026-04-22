@@ -1,8 +1,8 @@
-package org.example.infra.junit
+package infra.junit
 
 import com.codeborne.selenide.Screenshots
 import io.qameta.allure.Attachment
-import org.example.config.Config
+import config.Config
 import org.junit.platform.engine.TestExecutionResult
 import org.junit.platform.launcher.TestExecutionListener
 import org.junit.platform.launcher.TestIdentifier
@@ -13,7 +13,7 @@ class GlobalTestListener : TestExecutionListener {
         override fun testPlanExecutionStarted(testPlan: TestPlan) {
             println("|--- Test plan started ---|")
             // прогреваем конфиг, чтобы упасть сразу, если он битый
-            Config.props
+            Config.get
         }
 
     override fun executionStarted(testIdentifier: TestIdentifier) {

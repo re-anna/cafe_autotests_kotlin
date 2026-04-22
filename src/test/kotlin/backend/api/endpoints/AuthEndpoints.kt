@@ -1,8 +1,8 @@
-package org.example.backend.api.endpoints
+package backend.api.endpoints
 
 
-import org.example.backend.api.models.LoginRequest
-import org.example.backend.api.models.LoginResponse
+import backend.api.models.LoginRequest
+import backend.api.models.LoginResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST

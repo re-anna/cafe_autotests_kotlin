@@ -1,4 +1,4 @@
-package org.example.backend.api.models
+package backend.api.models
 
 data class LoginRequest(
     val email: String,
