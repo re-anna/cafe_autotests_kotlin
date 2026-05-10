@@ -26,8 +26,11 @@ class ProductController: Endpoints() {
 
     @Step("Create new product")
     fun createProduct(token: String? = authHelper.getAdminToken(), product: CreateProductsRequest): Response<CreateProductsResponse>{
-        return products.postCreateProduct(token, product).execute()
-            .also {GarbageCollector.products.add(it.getAsObject().id)}
+        val response = products.postCreateProduct(token, product).execute()
+            if (response.isSuccessful){
+                GarbageCollector.products.add(response.getAsObject().id)
+            }
+        return response
     }
 
     @Step("Delete product with id: {id}")
