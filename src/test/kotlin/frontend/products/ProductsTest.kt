@@ -7,11 +7,12 @@ import frontend.pages.ProductsPage
 import io.kotest.matchers.equals.shouldBeEqual
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 
+@Tag("e2e")
 class ProductsTest: BaseUiTest() {
 
-    val controllers = Controllers()
     val productsHelper = ProductsHelper()
 
     @Test

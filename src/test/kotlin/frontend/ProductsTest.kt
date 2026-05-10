@@ -3,7 +3,7 @@ package frontend
 import backend.helpers.ProductsHelper
 import backend.api.models.products.CreateProductsRequest
 import backend.controllers.Controllers
-import backend.extension.ResponseExt.Companion.getAsObject
+import backend.extension.ResponseExt.getAsObject
 import frontend.helpers.BaseUiTest
 import frontend.pages.MainPage
 import frontend.pages.ProductsPage
@@ -12,10 +12,12 @@ import io.kotest.matchers.shouldBe
 import io.qameta.allure.Feature
 import io.qameta.allure.Story
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 
 @Feature("")
 @Story("frontend/products")
+@Tag("frontend")
 class ProductsTest: BaseUiTest() {
 
     private val controllers = Controllers()

@@ -3,7 +3,6 @@ package backend
 import backend.api.models.ErrorResponse
 import backend.api.models.emptyCredentials
 import backend.api.models.invalidCredentials
-import backend.controllers.Controllers
 import backend.extension.ResponseExt.getAsObject
 import backend.extension.ResponseExt.getErrorAsObject
 import frontend.helpers.BaseTest
@@ -14,7 +13,6 @@ import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 
 @Tag("backend")
-
 class LoginTest : BaseTest() {
 
     @Test

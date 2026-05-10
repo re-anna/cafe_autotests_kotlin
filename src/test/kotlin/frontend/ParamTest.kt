@@ -6,10 +6,12 @@ import frontend.pages.ProductsPage
 import io.kotest.matchers.collections.shouldContain
 import io.kotest.matchers.collections.shouldContainAllInAnyOrder
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
 
+@Tag("frontend")
 class ParamTest : BaseUiTest() {
 
     @ParameterizedTest

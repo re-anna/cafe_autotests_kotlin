@@ -1,6 +1,5 @@
 package backend
 
-import backend.helpers.AuthHelper
 import backend.api.models.ErrorResponse
 import backend.api.models.userAlreadyExists
 import backend.api.models.users.UpdateRequest
@@ -14,8 +13,10 @@ import io.kotest.matchers.equals.shouldBeEqual
 import io.kotest.matchers.ints.shouldBeGreaterThan
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 
+@Tag("backend")
 class UserTests: BaseTest() {
 
     @Test

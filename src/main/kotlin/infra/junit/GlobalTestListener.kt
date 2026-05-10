@@ -18,14 +18,17 @@ import org.junit.platform.launcher.TestPlan
 class GlobalTestListener : Controllers(), TestExecutionListener {
 
     private val authHelper = AuthHelper()
-    private val productsHelper = ProductsHelper()
 
     override fun testPlanExecutionStarted(testPlan: TestPlan) {
         println("|------ Test Plan Started -----|")
         println("Initializing Configurations...").also { Config.get }
         println("Initializing Selenide WebDriver...").also { Configuration.browser = DriverProvider::class.java.name }
 
-        productsHelper.ensureProductsWithWordExists("Coffee",5)
+        val tag = System.getProperty("TAG")
+        if (tag == "ui" || tag == "e2e") {
+            println("Preparing products for UI/E2E...")
+            ProductsHelper().ensureProductsWithWordExists("Coffee",5)
+        }
     }
 
     override fun executionStarted(testIdentifier: TestIdentifier) {

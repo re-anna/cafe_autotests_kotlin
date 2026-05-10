@@ -10,10 +10,12 @@ import io.kotest.matchers.ints.shouldBeGreaterThanOrEqual
 import io.qameta.allure.Feature
 import io.qameta.allure.Story
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 
 @Feature("")
 @Story("Products")
+@Tag("e2e")
 class FavProducts: BaseUiTest() {
 
     private val controllers = Controllers()

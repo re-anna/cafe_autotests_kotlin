@@ -12,14 +12,15 @@ import io.kotest.matchers.equals.shouldBeEqual
 import io.kotest.matchers.ints.shouldBeLessThanOrEqual
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import kotlin.collections.emptyList
 
+@Tag("backend")
 class GetAllUsersTest: BaseTest() {
 
     private val userHelper = UserHelper()
 
-    private val authHelper = AuthHelper()
     private val myLimit = 10
     private val limit = 50
     private val bigLimit = 400

@@ -7,11 +7,11 @@ import frontend.helpers.BaseTest
 import infra.junit.TestContext.token
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 
+@Tag("backend")
 class ProductTests: BaseTest() {
-
-    private val authHelper = AuthHelper()
 
     @Test
     @DisplayName("Create valid product")

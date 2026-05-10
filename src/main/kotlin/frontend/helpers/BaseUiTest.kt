@@ -2,6 +2,7 @@ package frontend.helpers
 
 import com.codeborne.selenide.Configuration
 import com.codeborne.selenide.Selenide
+import com.codeborne.selenide.WebDriverRunner
 import config.Config
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -13,7 +14,7 @@ open class BaseUiTest: BaseTest() {
         Configuration.timeout = 15_000
         Configuration.pageLoadStrategy = "normal"
         Configuration.reopenBrowserOnFail = true
-      //  Configuration.browser = DriverProvider::class.java.name
+        Configuration.browser = DriverProvider::class.java.name
         }
 
     @BeforeEach
@@ -24,7 +25,9 @@ open class BaseUiTest: BaseTest() {
 
     @AfterEach
     fun cleanBrowser(){
-        Selenide.clearBrowserCookies()
-        Selenide.clearBrowserLocalStorage()
+        if (WebDriverRunner.hasWebDriverStarted()){
+                Selenide.clearBrowserCookies()
+                Selenide.clearBrowserLocalStorage()
+            }
     }
 }
