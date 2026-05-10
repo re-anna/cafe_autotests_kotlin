@@ -1,0 +1,46 @@
+package frontend.products
+
+import backend.helpers.ProductsHelper
+import backend.controllers.Controllers
+import frontend.helpers.BaseUiTest
+import frontend.pages.ProductsPage
+import io.kotest.matchers.equals.shouldBeEqual
+import io.kotest.matchers.shouldBe
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Test
+
+class ProductsTest: BaseUiTest() {
+
+    val controllers = Controllers()
+    val productsHelper = ProductsHelper()
+
+    @Test
+    @DisplayName("Check that created 5 products via backend is displayed on frontend")
+    fun checkFiveProducts(){
+        val listOfProducts = productsHelper.createProducts(5).sortedByDescending { it.name }
+
+        val products = ProductsPage()
+            .open()
+            .getProductsAsObjects()
+
+
+        products.forEachIndexed { index, item ->
+            item.name shouldBe listOfProducts[index].name
+        }
+    }
+
+    @Test
+    @DisplayName("Create 'COFFEE' products via back and then check them on frontend and backend")
+    fun checkCreatedItems(){
+        val word = "COFFEE"
+        productsHelper.ensureProductsWithWordExists(word = word, minCount = 5)
+
+        val frontendCoffeeCount = ProductsPage()
+            .open()
+            .countProductsWithWord(word)
+
+        val backendProductCount = productsHelper.countProductsWithWordBackend(word)
+
+        frontendCoffeeCount shouldBeEqual backendProductCount
+    }
+}

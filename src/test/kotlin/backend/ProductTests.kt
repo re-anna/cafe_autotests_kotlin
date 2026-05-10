@@ -1,15 +1,15 @@
-package backend.test
+package backend
 
-import backend.api.models.products.defaultProduct
-import backend.controllers.Controllers
-import backend.extension.ResponseExt.getAsObject
 import backend.helpers.AuthHelper
+import backend.api.models.products.defaultProduct
+import backend.extension.ResponseExt.getAsObject
+import frontend.helpers.BaseTest
 import infra.junit.TestContext.token
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
-class ProductTest: Controllers() {
+class ProductTests: BaseTest() {
 
     private val authHelper = AuthHelper()
 
@@ -21,9 +21,8 @@ class ProductTest: Controllers() {
             product = defaultProduct()
         ).getAsObject()
 
-        val expectedProduct = products.getProductById(baseProduct.id).getAsObject()
+         val expectedProduct = products.getProductById(baseProduct.id).getAsObject()
 
         baseProduct shouldBe expectedProduct
     }
-
 }

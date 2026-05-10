@@ -18,8 +18,7 @@ object Config {
     private const val DEFAULT_PROP_FILE = "/example.properties"
     
     val get: Props by lazy {
-        val fileName = System.getProperty("env_config","test_config")
-        //DEFAULT_PROP_FILE
+        val fileName = System.getProperty("env_config",DEFAULT_PROP_FILE)
 
         val properties = Properties().apply {
             val stream = Config::class.java.getResourceAsStream(fileName)

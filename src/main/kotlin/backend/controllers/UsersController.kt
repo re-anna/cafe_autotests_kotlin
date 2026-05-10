@@ -15,7 +15,7 @@ class UsersController : Endpoints() {
     private val authHelper = AuthHelper()
 
     @Step("Get all users")
-    fun getAllUsers(token: String = authHelper.getAdminToken(), offset: Int = 0, limit: Int = 50): Response<List<CreateUserResponse>> {
+    fun getAllUsers(token: String? = authHelper.getAdminToken(), offset: Int = 0, limit: Int = 50): Response<List<CreateUserResponse>> {
         return users.getUsers(token, offset, limit).execute()
     }
 

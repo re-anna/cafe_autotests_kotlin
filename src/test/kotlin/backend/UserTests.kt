@@ -1,23 +1,22 @@
-package backend.test
+package backend
 
+import backend.helpers.AuthHelper
 import backend.api.models.ErrorResponse
 import backend.api.models.userAlreadyExists
 import backend.api.models.users.UpdateRequest
 import backend.api.models.users.randomUser
-import backend.controllers.Controllers
 import backend.extension.ResponseExt.checkIsSuccessful
 import backend.extension.ResponseExt.getAsObject
 import backend.extension.ResponseExt.getErrorAsObject
+import frontend.helpers.BaseTest
 import infra.junit.TestContext.token
-import io.kotest.matchers.comparables.shouldBeGreaterThan
 import io.kotest.matchers.equals.shouldBeEqual
+import io.kotest.matchers.ints.shouldBeGreaterThan
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.DisplayName
-import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 
-@Tag("backend")
-class UsersTest : Controllers(){
+class UserTests: BaseTest() {
 
     @Test
     @DisplayName("Create user with valid data")

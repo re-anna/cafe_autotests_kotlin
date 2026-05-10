@@ -25,7 +25,7 @@ class GlobalTestListener : Controllers(), TestExecutionListener {
         println("Initializing Configurations...").also { Config.get }
         println("Initializing Selenide WebDriver...").also { Configuration.browser = DriverProvider::class.java.name }
 
-        productsHelper.createProducts(5)
+        productsHelper.ensureProductsWithWordExists("Coffee",5)
     }
 
     override fun executionStarted(testIdentifier: TestIdentifier) {
