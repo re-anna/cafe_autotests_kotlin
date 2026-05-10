@@ -53,7 +53,7 @@ class GlobalTestListener : Controllers(), TestExecutionListener {
         println("|------ Test Plan Finished -----|")
         Selenide.closeWebDriver()
         println("|------ GarbageCollector -----|")
-        GarbageCollector.users.forEach { id ->
+        GarbageCollector.user.forEach { id ->
             user.deleteUserById(token = authHelper.getAdminToken(), id = id)
                 .also { println("Deleted User: $id") }
         }

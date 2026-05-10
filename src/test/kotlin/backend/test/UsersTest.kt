@@ -18,7 +18,7 @@ class UsersTest : Controllers(){
     fun createUserPositive() {
         val created = users.createUser(defaultUser).getAsObject()
         created.email shouldBe created.email
-        //TO DO поправить
+        //TODO поправить
     }
 
     @Test

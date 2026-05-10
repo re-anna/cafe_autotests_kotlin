@@ -5,3 +5,8 @@ data class CreateProductsRequest(
     var price: Double?,
     var description: String?
 )
+fun defaultProduct() = CreateProductsRequest(
+    "Espresso for boss",
+    1000.0,
+    "Best coffee ever"
+)
