@@ -1,15 +1,17 @@
 package database
 
+import config.Config
 import java.sql.DriverManager
 import java.sql.ResultSet
 import java.sql.Statement
 
 class JDBCHelper {
 
-    private val jdbcUrl = "jdbc:postgresql://localhost:5432/playground"
-    private val username: String = "postgres"
-    private val password: String = "postgres"
-    private val client = DriverManager.getConnection(jdbcUrl, username, password)
+    private val client = DriverManager.getConnection(
+        Config.db
+        jdbcUrl,
+        username,
+        password)
 
     fun getProducts(): List<Product> {
         val products = mutableListOf<Product>()

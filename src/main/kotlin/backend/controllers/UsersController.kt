@@ -8,6 +8,7 @@ import backend.api.models.users.UpdateRequest
 import backend.extension.ResponseExt.getAsObject
 import backend.helpers.AuthHelper
 import backend.helpers.GarbageCollector
+import com.codeborne.selenide.Condition.id
 import io.qameta.allure.Step
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -23,7 +24,7 @@ class UsersController : Endpoints() {
     @Step("Create user")
     fun createUser(body: CreateUserRequest): Response<CreateUserResponse> {
         return users.createUser(body).execute()
-            .also { GarbageCollector.users.add(it.getAsObject().id) }
+            .also { GarbageCollector.user.add(it.getAsObject().id}
     }
 
     @Step("Get user by id={id}")
