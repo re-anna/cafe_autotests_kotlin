@@ -8,9 +8,8 @@ data class CreateUserRequest(
     val email: String
 )
 
-val defaultUser: CreateUserRequest
-    get() = CreateUserRequest(
-        username = "random",
-        password = "random",
-        email = "auto-${Random.nextInt(10000)}@autotest.com"
-    )
+fun randomUser() = CreateUserRequest(
+    username = "random",
+    password = "user",
+    email = "random-${Random.nextInt(10000)}@autotest.com"
+)

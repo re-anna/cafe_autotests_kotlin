@@ -1,17 +1,18 @@
 package backend.helpers
 
-import backend.api.endpoints.exstension.Exstension.Companion.getAsObject
+import backend.api.models.users.randomUser
 import backend.controllers.Controllers
+import backend.extension.ResponseExt.getAsObject
 
 class UserHelper: Controllers() {
      fun ensureAmountOfUsers(target: Int) {
-        val existingUsers = user.getAllUsers()
+        val existingUsers = users.getAllUsers()
             .getAsObject()
             .size
 
         val neededUsers = (target - existingUsers).coerceAtLeast(0)
         repeat(neededUsers){
-            user.createUser(randomUser()).getAsObject()
+            users.createUser(randomUser()).getAsObject()
         }
     }
 

@@ -8,10 +8,10 @@ import java.sql.Statement
 class JDBCHelper {
 
     private val client = DriverManager.getConnection(
-        Config.db
-        jdbcUrl,
-        username,
-        password)
+        Config.get.dbUrl,
+        Config.get.dbUsername,
+        Config.get.dbPassword
+        )
 
     fun getProducts(): List<Product> {
         val products = mutableListOf<Product>()

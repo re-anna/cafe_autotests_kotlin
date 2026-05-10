@@ -9,7 +9,6 @@ import com.codeborne.selenide.Screenshots
 import com.codeborne.selenide.Selenide
 import frontend.helpers.DriverProvider
 import config.Config
-import database.JDBCHelper
 import io.qameta.allure.Attachment
 import org.junit.platform.engine.TestExecutionResult
 import org.junit.platform.launcher.TestExecutionListener
@@ -54,7 +53,7 @@ class GlobalTestListener : Controllers(), TestExecutionListener {
         Selenide.closeWebDriver()
         println("|------ GarbageCollector -----|")
         GarbageCollector.user.forEach { id ->
-            user.deleteUserById(token = authHelper.getAdminToken(), id = id)
+            users.deleteUserById(token = authHelper.getAdminToken(), id = id)
                 .also { println("Deleted User: $id") }
         }
 //todo

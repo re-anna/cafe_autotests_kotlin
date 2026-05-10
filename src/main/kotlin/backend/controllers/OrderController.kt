@@ -1,10 +1,10 @@
 package backend.controllers
 
 import backend.api.endpoints.Endpoints
-import backend.api.endpoints.exstension.Exstension.Companion.getAsObject
 import backend.api.models.orders.CreateOrderRequest
 import backend.api.models.orders.CreateOrderResponse
 import backend.api.models.orders.UpdateOrderStatusRequest
+import backend.extension.ResponseExt.getAsObject
 import backend.helpers.AuthHelper
 import backend.helpers.GarbageCollector
 import io.qameta.allure.Step

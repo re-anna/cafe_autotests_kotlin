@@ -1,10 +1,16 @@
 package backend.test
 
+import backend.api.models.ErrorResponse
+import backend.api.models.userAlreadyExists
 import backend.api.models.users.UpdateRequest
-import backend.api.models.users.defaultUser
+import backend.api.models.users.randomUser
 import backend.controllers.Controllers
 import backend.extension.ResponseExt.checkIsSuccessful
 import backend.extension.ResponseExt.getAsObject
+import backend.extension.ResponseExt.getErrorAsObject
+import infra.junit.TestContext.token
+import io.kotest.matchers.comparables.shouldBeGreaterThan
+import io.kotest.matchers.equals.shouldBeEqual
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Tag
@@ -14,30 +20,87 @@ import org.junit.jupiter.api.Test
 class UsersTest : Controllers(){
 
     @Test
-    @DisplayName("Users: create user positive")
-    fun createUserPositive() {
-        val created = users.createUser(defaultUser).getAsObject()
-        created.email shouldBe created.email
-        //TODO поправить
+    @DisplayName("Create user with valid data")
+    fun createUser(){
+        val actualUser = users.createUser(randomUser()).getAsObject()
+        val expectedUser = users.getUserById(token = token, id = actualUser.id)
+
+        expectedUser shouldBeEqual actualUser
     }
 
     @Test
-    @DisplayName("Users: update phone via PUT")
-    fun updatePhone() {
-        val created = users.createUser(defaultUser).getAsObject()
+    @DisplayName("Delete valid user should return 200")
+    fun deleteDefaultUser(){
+        val actualUser = users.createUser(randomUser()).getAsObject()
+        val delete = users.deleteUserById(token = token, id = actualUser.id)
 
-        val updated = users.updateUserById(
-            id = created.id,
-            body = UpdateRequest(phoneNumber = "1234567890")
-        ).getAsObject()
-
-        updated.phoneNumber shouldBe "1234567890"
+        delete.code() shouldBe 200
     }
 
     @Test
-    @DisplayName("Users: update partial model (password only should be successful")
-    fun updatePartial() {
-        val created = users.createUser(defaultUser).getAsObject()
-        users.updateUserById(id = created.id, body = UpdateRequest(password = "updatedPassword")).checkIsSuccessful()
+    @DisplayName("Update phone number")
+    fun updatePhoneNumber(){
+        val createdUser = users.createUser(randomUser()).getAsObject()
+        val newPhone = "89998988998"
+
+        users.updateUserById(token,createdUser.id, UpdateRequest(phoneNumber = newPhone)).getAsObject()
+
+        val updatedUser = users.getUserById(token,createdUser.id).getAsObject()
+
+        updatedUser.phoneNumber shouldBeEqual newPhone
+    }
+
+    @Test
+    @DisplayName("Update full user model with valid data")
+    fun updateFullUserData(){
+        val newUser = users.createUser(randomUser()).getAsObject()
+        val updateRequest = UpdateRequest(
+            "updated-${newUser.username}",
+            "updated-password",
+            "updated-${newUser.email}",
+            "899888888}"
+        )
+
+        val updatedUser = users.updateUserById(token, id = newUser.id, body = updateRequest).getAsObject()
+        val login = auth.login(updateRequest.email!!, updateRequest.password!!).getAsObject()
+
+        login.accessToken.length shouldBeGreaterThan 10
+        updatedUser.phoneNumber shouldBe updateRequest.phoneNumber
+        updatedUser.username shouldBe updateRequest.username
+        updatedUser.email shouldBe updateRequest.email
+    }
+
+    @Test
+    @DisplayName("Update partial user model with valid data")
+    fun updatePartialUserData(){
+        val newUser = users.createUser(randomUser()).getAsObject()
+        val updateRequest = UpdateRequest( password ="UpdatePassword")
+        users.updateUserById(token,newUser.id,updateRequest).checkIsSuccessful()
+
+        val login = auth.login(newUser.email, updateRequest.password!!).getAsObject()
+
+        login.accessToken.length shouldBeGreaterThan 10
+    }
+
+    @Test
+    @DisplayName("Check that random user is created")
+    fun checkCreationOfNewUser(){
+        val newUser = randomUser()
+        val request = users.createUser(newUser).getAsObject()
+
+        request.id shouldBeGreaterThan 0
+        request.username shouldBe newUser.username
+        request.email shouldBe newUser.email
+    }
+
+    @Test
+    @DisplayName("Error: Create same user 2 times")
+    fun checkDuplicationUserCreationError(){
+        val newUser = randomUser()
+        users.createUser(newUser).getAsObject()
+
+        val error = users.createUser(newUser).getErrorAsObject<ErrorResponse>()
+
+        error shouldBe userAlreadyExists
     }
 }

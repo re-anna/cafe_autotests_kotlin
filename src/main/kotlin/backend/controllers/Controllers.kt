@@ -1,10 +1,9 @@
 package backend.controllers
 
 open class Controllers {
-    //todo вернуть бай лези
 
-    val auth get() = AuthController()
-    val users get() = UsersController()
-    val products get() = ProductController()
-    val orders get() = OrderController()
+    val auth by lazy {AuthController() }
+    val users by lazy {UsersController() }
+    val products by lazy {ProductController() }
+    val orders by lazy {OrderController() }
 }

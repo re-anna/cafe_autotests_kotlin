@@ -1,8 +1,8 @@
 package backend.test
 
-import backend.api.endpoints.exstension.Exstension.Companion.getAsObject
 import backend.api.models.products.defaultProduct
 import backend.controllers.Controllers
+import backend.extension.ResponseExt.getAsObject
 import backend.helpers.AuthHelper
 import infra.junit.TestContext.token
 import io.kotest.matchers.shouldBe
