@@ -43,7 +43,6 @@ class UserTest: BaseUiTest() {
         CreateUserPopup().fillCreateAccount(username,email,pass)
             .clickCreateUserBtn()
 
-        sleep(10000)
         val expectedErrorText = "Please enter username, email and password"
         val actualErrorText = CreateUserPopup().getErrorText()
 

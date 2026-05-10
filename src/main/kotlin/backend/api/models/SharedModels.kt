@@ -18,3 +18,8 @@ data class ErrorResponse(
             code = 400,
             reason = "Something went wrong. Please verify request."
         )
+
+        val invalidToken = ErrorResponse(
+            code = 401,
+            reason = "The token is invalid."
+        )
