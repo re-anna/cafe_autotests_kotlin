@@ -1,0 +1,20 @@
+package backend.api.models
+
+data class ErrorResponse(
+    var code: Int,
+    var reason: String
+)
+        val invalidCredentials = ErrorResponse(
+            code = 400,
+            reason = "Invalid email or password"
+        )
+
+        val emptyCredentials = ErrorResponse(
+            code = 400,
+            reason = "Invalid email or password"
+        )
+
+        val userAlreadyExists = ErrorResponse(
+            code = 400,
+            reason = "Something went wrong. Please verify request."
+        )

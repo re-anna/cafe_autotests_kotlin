@@ -1,12 +1,10 @@
 package ui
 
-import com.codeborne.selenide.WebDriverRunner.url
 import frontend.helpers.BaseUiTest
 import frontend.pages.MainPage
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import org.openqa.selenium.support.ui.Wait
 
 class HeaderUiTest : BaseUiTest() {
 
