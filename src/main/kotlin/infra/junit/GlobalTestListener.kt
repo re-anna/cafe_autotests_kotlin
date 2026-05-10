@@ -25,8 +25,8 @@ class GlobalTestListener : Controllers(), TestExecutionListener {
         println("Initializing Selenide WebDriver...").also { Configuration.browser = DriverProvider::class.java.name }
 
         val tag = System.getProperty("TAG")
-        if (tag == "ui" || tag == "e2e") {
-            println("Preparing products for UI/E2E...")
+        if (tag == "frontend" || tag == "e2e") {
+            println("Preparing products for Frontend/E2E...")
             ProductsHelper().ensureProductsWithWordExists("Coffee",5)
         }
     }

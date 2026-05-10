@@ -17,6 +17,8 @@ class CreateUserPopup {
         .find(shadowCss("input"))
     private val createUserBtn: SelenideElement get() =element(byDataTestId("create-submit"))
 
+    private val createUserError: SelenideElement get() = element(byDataTestId("create-error"))
+
     @Step("Fill form Create Account")
     fun fillCreateAccount(username: String, email: String, pass: String): CreateUserPopup {
         usernameInput.value = username
@@ -29,5 +31,11 @@ class CreateUserPopup {
     fun clickCreateUserBtn(): CreateUserPopup {
         createUserBtn.click()
         return this
+    }
+
+    @Step("Get create user error text")
+    fun getErrorText(): String {
+        val text = CreateUserPopup().createUserError.text()
+        return text
     }
 }
