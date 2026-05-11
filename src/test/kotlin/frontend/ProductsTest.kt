@@ -3,7 +3,7 @@ package frontend
 import backend.helpers.ProductsHelper
 import backend.api.models.products.CreateProductsRequest
 import backend.controllers.Controllers
-import backend.extension.ResponseExt.getAsObject
+import backend.api.extension.ResponseExt.getAsObject
 import frontend.helpers.BaseUiTest
 import frontend.pages.MainPage
 import frontend.pages.ProductsPage

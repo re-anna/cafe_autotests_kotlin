@@ -2,7 +2,7 @@ package backend.helpers
 
 import backend.api.models.users.randomUser
 import backend.controllers.Controllers
-import backend.extension.ResponseExt.getAsObject
+import backend.api.extension.ResponseExt.getAsObject
 
 class UserHelper: Controllers() {
      fun ensureAmountOfUsers(target: Int) {

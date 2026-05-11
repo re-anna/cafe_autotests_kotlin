@@ -4,9 +4,9 @@ import backend.api.models.ErrorResponse
 import backend.api.models.userAlreadyExists
 import backend.api.models.users.UpdateRequest
 import backend.api.models.users.randomUser
-import backend.extension.ResponseExt.checkIsSuccessful
-import backend.extension.ResponseExt.getAsObject
-import backend.extension.ResponseExt.getErrorAsObject
+import backend.api.extension.ResponseExt.checkIsSuccessful
+import backend.api.extension.ResponseExt.getAsObject
+import backend.api.extension.ResponseExt.getErrorAsObject
 import frontend.helpers.BaseTest
 import infra.junit.TestContext.token
 import io.kotest.matchers.equals.shouldBeEqual

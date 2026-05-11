@@ -10,3 +10,8 @@ fun defaultProduct() = CreateProductsRequest(
     1000.0,
     "Best coffee ever"
 )
+
+fun inValidProduct() = CreateProductsRequest (
+    "",
+    1.0,
+    "")

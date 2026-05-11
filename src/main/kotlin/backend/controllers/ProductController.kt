@@ -5,7 +5,7 @@ import backend.helpers.AuthHelper
 import backend.helpers.GarbageCollector
 import backend.api.models.products.CreateProductsRequest
 import backend.api.models.products.CreateProductsResponse
-import backend.extension.ResponseExt.getAsObject
+import backend.api.extension.ResponseExt.getAsObject
 import io.qameta.allure.Step
 import okhttp3.ResponseBody
 import retrofit2.Response

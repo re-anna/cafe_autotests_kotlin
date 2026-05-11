@@ -1,6 +1,6 @@
 package backend.api.endpoints
 
-import infra.RetrofitClient
+import backend.RetrofitClient
 import kotlin.jvm.java
 
 open class Endpoints {

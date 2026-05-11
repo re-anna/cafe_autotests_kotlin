@@ -20,7 +20,7 @@ class UserTest: BaseUiTest() {
         val email = "random-${Random.nextInt(10000)}@autotest.com"
         val pass = "password"
 
-        HeaderComponent().clickLink("Join")
+        MainPage().open().header().clickLink("Join")
 
         CreateUserPopup().fillCreateAccount(username,email,pass)
             .clickCreateUserBtn()
@@ -38,7 +38,7 @@ class UserTest: BaseUiTest() {
         val email = ""
         val pass = ""
 
-        HeaderComponent().clickLink("Join")
+        MainPage().open().header().clickLink("Join")
 
         CreateUserPopup().fillCreateAccount(username,email,pass)
             .clickCreateUserBtn()

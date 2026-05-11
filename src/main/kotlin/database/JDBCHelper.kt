@@ -29,13 +29,11 @@ class JDBCHelper {
                 )
                 products.add(product)
             }
-
             resultSet.close()
             statement.close()
         } catch (e: Exception) {
             println("Error fetching products ${e.message}")
         }
-
         return products
     }
 

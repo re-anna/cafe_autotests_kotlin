@@ -2,8 +2,8 @@ package backend.helpers
 
 import backend.api.models.auth.defaultAdmin
 import backend.controllers.Controllers
-import backend.extension.ResponseExt.getAsObject
-import backend.extension.ResponseExt.toBearer
+import backend.api.extension.ResponseExt.getAsObject
+import backend.api.extension.ResponseExt.toBearer
 import io.qameta.allure.Step
 import org.junit.jupiter.api.DisplayName
 

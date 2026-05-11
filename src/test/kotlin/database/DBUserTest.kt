@@ -1,8 +1,7 @@
 package database
 
 import backend.controllers.Controllers
-import backend.extension.ResponseExt.getAsObject
-import backend.helpers.AuthHelper
+import backend.api.extension.ResponseExt.getAsObject
 import backend.helpers.GarbageCollector
 import frontend.components.popup.CreateUserPopup
 import frontend.helpers.BaseTest

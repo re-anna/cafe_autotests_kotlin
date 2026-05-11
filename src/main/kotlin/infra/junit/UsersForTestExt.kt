@@ -3,7 +3,7 @@ package infra.junit
 
 import backend.api.models.users.randomUser
 import backend.controllers.Controllers
-import backend.extension.ResponseExt.getAsObject
+import backend.api.extension.ResponseExt.getAsObject
 import backend.helpers.AuthHelper
 import org.junit.jupiter.api.extension.BeforeEachCallback
 import org.junit.jupiter.api.extension.ExtensionContext

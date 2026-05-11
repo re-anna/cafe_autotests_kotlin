@@ -17,4 +17,10 @@ class CartPopup {
     fun getCartProducts(): List<CartItem> {
         return CartItems(newCartItems).getItems()
     }
+
+    @Step("Create order")
+    fun createOrder(): CartPopup{
+        btnCheckout.click()
+        return this
+    }
 }

@@ -1,10 +1,9 @@
 package backend
 
 import backend.api.models.users.randomUser
-import backend.helpers.AuthHelper
 import backend.helpers.UserHelper
-import backend.extension.ResponseExt.checkIsSuccessful
-import backend.extension.ResponseExt.getAsObject
+import backend.api.extension.ResponseExt.checkIsSuccessful
+import backend.api.extension.ResponseExt.getAsObject
 import frontend.helpers.BaseTest
 import infra.junit.TestContext.token
 import io.kotest.matchers.collections.shouldContain

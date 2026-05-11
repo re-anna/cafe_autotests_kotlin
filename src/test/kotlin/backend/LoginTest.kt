@@ -3,8 +3,8 @@ package backend
 import backend.api.models.ErrorResponse
 import backend.api.models.emptyCredentials
 import backend.api.models.invalidCredentials
-import backend.extension.ResponseExt.getAsObject
-import backend.extension.ResponseExt.getErrorAsObject
+import backend.api.extension.ResponseExt.getAsObject
+import backend.api.extension.ResponseExt.getErrorAsObject
 import frontend.helpers.BaseTest
 import io.kotest.matchers.comparables.shouldBeGreaterThan
 import io.kotest.matchers.shouldBe

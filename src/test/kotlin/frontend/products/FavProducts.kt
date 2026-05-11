@@ -2,7 +2,7 @@ package frontend.products
 
 import backend.api.models.products.CreateProductsRequest
 import backend.controllers.Controllers
-import backend.extension.ResponseExt.getAsObject
+import backend.api.extension.ResponseExt.getAsObject
 import frontend.helpers.BaseUiTest
 import frontend.pages.MainPage
 import io.kotest.matchers.collections.shouldContain

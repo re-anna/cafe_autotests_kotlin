@@ -34,8 +34,6 @@ class CreateUserPopup {
     }
 
     @Step("Get create user error text")
-    fun getErrorText(): String {
-        val text = CreateUserPopup().createUserError.text()
-        return text
-    }
+    fun getErrorText(): String = createUserError.text()
+
 }

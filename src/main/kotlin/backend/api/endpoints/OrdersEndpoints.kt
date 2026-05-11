@@ -1,8 +1,8 @@
 package backend.api.endpoints
 
-import backend.api.models.orders.CreateOrderRequest
 import backend.api.models.orders.CreateOrderResponse
 import backend.api.models.orders.UpdateOrderStatusRequest
+import backend.api.models.products.CreateProductsRequest
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -35,8 +35,8 @@ interface OrdersEndpoints {
 
     @POST("orders/create")
     fun postOrderCreate(
-        @Header(Headers.AUTHORIZATION) token: String,
-        @Body body: CreateOrderRequest
+        @Header(Headers.AUTHORIZATION) token: String?,
+        @Body body: CreateProductsRequest
     ) : Call<CreateOrderResponse>
 
     @PUT("orders/{id}/status")

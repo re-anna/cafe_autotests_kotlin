@@ -1,10 +1,10 @@
 package backend.controllers
 
 import backend.api.endpoints.Endpoints
-import backend.api.models.orders.CreateOrderRequest
 import backend.api.models.orders.CreateOrderResponse
 import backend.api.models.orders.UpdateOrderStatusRequest
-import backend.extension.ResponseExt.getAsObject
+import backend.api.extension.ResponseExt.getAsObject
+import backend.api.models.products.CreateProductsRequest
 import backend.helpers.AuthHelper
 import backend.helpers.GarbageCollector
 import io.qameta.allure.Step
@@ -15,8 +15,8 @@ class OrderController: Endpoints() {
 
     @Step("Create order")
     fun createOrder(
-        token: String = authHelper.getAdminToken(),
-        body: CreateOrderRequest
+        token: String? = authHelper.getAdminToken(),
+        body: CreateProductsRequest
     ): CreateOrderResponse {
         return orders.postOrderCreate(token, body).execute().getAsObject()
             .also { GarbageCollector.orders.add(it.id) }

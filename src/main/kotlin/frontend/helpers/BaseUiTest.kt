@@ -14,20 +14,26 @@ open class BaseUiTest: BaseTest() {
         Configuration.timeout = 15_000
         Configuration.pageLoadStrategy = "normal"
         Configuration.reopenBrowserOnFail = true
-        Configuration.browser = DriverProvider::class.java.name
+
+        val remote = System.getProperty("remote", "false").toBoolean()
+        if (remote) {
+            Configuration.browser = DriverProvider::class.java.name
+        } else {
+            Configuration.browser = "chrome"
         }
 
-    @BeforeEach
-    fun openBrowser() {
-        Selenide.open("/")
-    }
+        @BeforeEach
+        fun openBrowser() {
+            Selenide.open("/")
+        }
 
 
-    @AfterEach
-    fun cleanBrowser(){
-        if (WebDriverRunner.hasWebDriverStarted()){
+        @AfterEach
+        fun cleanBrowser() {
+            if (WebDriverRunner.hasWebDriverStarted()) {
                 Selenide.clearBrowserCookies()
                 Selenide.clearBrowserLocalStorage()
             }
+        }
     }
 }

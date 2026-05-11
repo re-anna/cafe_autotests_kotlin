@@ -1,4 +1,4 @@
-package backend.extension
+package backend.api.extension
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue

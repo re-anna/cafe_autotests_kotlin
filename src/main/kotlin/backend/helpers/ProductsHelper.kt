@@ -3,7 +3,7 @@ package backend.helpers
 import backend.api.models.products.CreateProductsRequest
 import backend.api.models.products.CreateProductsResponse
 import backend.controllers.Controllers
-import backend.extension.ResponseExt.getAsObject
+import backend.api.extension.ResponseExt.getAsObject
 import io.qameta.allure.Step
 
 class ProductsHelper : Controllers() {

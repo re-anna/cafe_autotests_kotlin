@@ -4,7 +4,7 @@ import backend.api.endpoints.Endpoints
 import backend.api.models.users.CreateUserRequest
 import backend.api.models.users.CreateUserResponse
 import backend.api.models.users.UpdateRequest
-import backend.extension.ResponseExt.getAsObject
+import backend.api.extension.ResponseExt.getAsObject
 import backend.helpers.AuthHelper
 import backend.helpers.GarbageCollector
 import io.qameta.allure.Step
@@ -21,8 +21,10 @@ class UsersController : Endpoints() {
 
     @Step("Create user")
     fun createUser(body: CreateUserRequest): Response<CreateUserResponse> {
-        return users.createUser(body).execute()
-            .also { GarbageCollector.user.add(it.getAsObject().id)}
+        val response =  users.createUser(body).execute()
+            if(response.isSuccessful) { GarbageCollector.user.add(response.getAsObject().id)
+            }
+        return response
     }
 
     @Step("Get user by id={id}")

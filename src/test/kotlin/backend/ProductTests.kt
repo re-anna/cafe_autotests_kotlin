@@ -2,11 +2,9 @@ package backend
 
 import backend.api.models.ErrorResponse
 import backend.api.models.invalidToken
-import backend.api.models.products.CreateProductsRequest
-import backend.helpers.AuthHelper
 import backend.api.models.products.defaultProduct
-import backend.extension.ResponseExt.getAsObject
-import backend.extension.ResponseExt.getErrorAsObject
+import backend.api.extension.ResponseExt.getAsObject
+import backend.api.extension.ResponseExt.getErrorAsObject
 import frontend.helpers.BaseTest
 import infra.junit.TestContext.token
 import io.kotest.matchers.equals.shouldBeEqual
