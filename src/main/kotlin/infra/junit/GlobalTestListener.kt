@@ -56,7 +56,7 @@ class GlobalTestListener : Controllers(), TestExecutionListener {
         Selenide.closeWebDriver()
         println("|------ GarbageCollector -----|")
         GarbageCollector.user.forEach { id ->
-            users.deleteUserById(token = authHelper.getAdminToken(), id = id)
+            users.deleteUserById(token = authHelper.getDefaultToken(), id = id)
                 .also { println("Deleted User: $id") }
         }
 //todo
@@ -65,12 +65,12 @@ class GlobalTestListener : Controllers(), TestExecutionListener {
         }*/
 
         GarbageCollector.products.forEach { id ->
-            products.deleteProductById(token = authHelper.getAdminToken(), id = id).also {
+            products.deleteProductById(token = authHelper.getDefaultToken(), id = id).also {
                 println("Deleted Product: $id")
             }
-            /*  user.getAllUsers(authHelper.getAdminToken(), 1, 50).getAsObject().forEach { users ->
+            /*  user.getAllUsers(authHelper.getDefaultToken(), 1, 50).getAsObject().forEach { users ->
                   if (users.email.contains("@autotest.com")) {
-                      user.deleteUserById(authHelper.getAdminToken(), users.id)
+                      user.deleteUserById(authHelper.getDefaultToken(), users.id)
                           .also { println(" ${users.email} deleted") }
                   }
               }*/

@@ -4,7 +4,7 @@ import backend.api.endpoints.Endpoints
 import backend.api.models.orders.CreateOrderResponse
 import backend.api.models.orders.UpdateOrderStatusRequest
 import backend.api.extension.ResponseExt.getAsObject
-import backend.api.models.products.CreateProductsRequest
+import backend.api.models.orders.CreateOrderRequest
 import backend.helpers.AuthHelper
 import backend.helpers.GarbageCollector
 import io.qameta.allure.Step
@@ -15,16 +15,18 @@ class OrderController: Endpoints() {
 
     @Step("Create order")
     fun createOrder(
-        token: String? = authHelper.getAdminToken(),
-        body: CreateProductsRequest
+        token: String = authHelper.getDefaultToken(),
+        body: CreateOrderRequest
     ): CreateOrderResponse {
-        return orders.postOrderCreate(token, body).execute().getAsObject()
+        return orders.postOrderCreate(token,body)
+            .execute()
+            .getAsObject()
             .also { GarbageCollector.orders.add(it.id) }
     }
 
     @Step("Get all orders")
     fun getAllOrders(
-        token: String = authHelper.getAdminToken(),
+        token: String = authHelper.getDefaultToken(),
         offset: Int = 0,
         limit: Int = 100
     ): List<CreateOrderResponse> {
@@ -33,7 +35,7 @@ class OrderController: Endpoints() {
 
     @Step("Get order by id")
     fun getOrderById(
-        token: String = authHelper.getAdminToken(),
+        token: String = authHelper.getDefaultToken(),
         id: Int
     ): CreateOrderResponse{
         return orders.getOrderById(token, id).execute().getAsObject()
@@ -41,7 +43,7 @@ class OrderController: Endpoints() {
 
     @Step("Get all orders by user id")
     fun getOrderByUserId(
-        token: String = authHelper.getAdminToken(),
+        token: String = authHelper.getDefaultToken(),
         id: Int
     ): List<CreateOrderResponse> {
         return orders.getOrderByUserId(token, id).execute().getAsObject()
@@ -49,7 +51,7 @@ class OrderController: Endpoints() {
 
     @Step("Change order status")
     fun updateOrderById(
-        token: String = authHelper.getAdminToken(),
+        token: String = authHelper.getDefaultToken(),
         id: Int,
         body: UpdateOrderStatusRequest
     ): CreateOrderResponse {

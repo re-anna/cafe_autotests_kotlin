@@ -1,5 +1,6 @@
 package backend.api.endpoints
 
+import backend.api.models.orders.CreateOrderRequest
 import backend.api.models.orders.CreateOrderResponse
 import backend.api.models.orders.UpdateOrderStatusRequest
 import backend.api.models.products.CreateProductsRequest
@@ -36,7 +37,7 @@ interface OrdersEndpoints {
     @POST("orders/create")
     fun postOrderCreate(
         @Header(Headers.AUTHORIZATION) token: String?,
-        @Body body: CreateProductsRequest
+        @Body body: CreateOrderRequest
     ) : Call<CreateOrderResponse>
 
     @PUT("orders/{id}/status")
@@ -45,5 +46,4 @@ interface OrdersEndpoints {
         @Path("id") id: Int,
         @Body body: UpdateOrderStatusRequest,
     ) : Call<CreateOrderResponse>
-
 }

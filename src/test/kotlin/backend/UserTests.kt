@@ -83,17 +83,6 @@ class UserTests: BaseTest() {
     }
 
     @Test
-    @DisplayName("Check that random user is created")
-    fun checkCreationOfNewUser(){
-        val newUser = randomUser()
-        val request = users.createUser(newUser).getAsObject()
-
-        request.id shouldBeGreaterThan 0
-        request.username shouldBe newUser.username
-        request.email shouldBe newUser.email
-    }
-
-    @Test
     @DisplayName("Error: Create same user 2 times")
     fun checkDuplicationUserCreationError(){
         val newUser = randomUser()

@@ -21,6 +21,7 @@ open class BaseUiTest: BaseTest() {
         } else {
             Configuration.browser = "chrome"
         }
+    }
 
         @BeforeEach
         fun openBrowser() {
@@ -35,5 +36,4 @@ open class BaseUiTest: BaseTest() {
                 Selenide.clearBrowserLocalStorage()
             }
         }
-    }
 }

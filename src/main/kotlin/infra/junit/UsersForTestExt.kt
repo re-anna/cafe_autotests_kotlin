@@ -15,7 +15,6 @@ class UsersForTestExt: Controllers(), BeforeEachCallback {
         val newUser = users.createUser(randomUser()).getAsObject()
         val token = authHelper.getAuthorizationToken(email = newUser.email, password = "user")
 
-        TestContext.user = newUser
-        TestContext.token = token
+        TestContext.set(newUser,token)
     }
 }

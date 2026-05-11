@@ -6,7 +6,6 @@ import backend.api.models.products.defaultProduct
 import backend.api.extension.ResponseExt.getAsObject
 import backend.api.extension.ResponseExt.getErrorAsObject
 import frontend.helpers.BaseTest
-import infra.junit.TestContext.token
 import io.kotest.matchers.equals.shouldBeEqual
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.DisplayName
@@ -20,7 +19,6 @@ class ProductTests: BaseTest() {
     @DisplayName("Create valid product")
     fun createValidProduct(){
         val baseProduct = products.createProduct(
-            token,
             product = defaultProduct()
         ).getAsObject()
 

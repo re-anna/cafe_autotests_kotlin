@@ -15,7 +15,7 @@ class UsersController : Endpoints() {
     private val authHelper = AuthHelper()
 
     @Step("Get all users")
-    fun getAllUsers(token: String? = authHelper.getAdminToken(), offset: Int = 0, limit: Int = 50): Response<List<CreateUserResponse>> {
+    fun getAllUsers(token: String? = authHelper.getDefaultToken(), offset: Int = 0, limit: Int = 50): Response<List<CreateUserResponse>> {
         return users.getUsers(token, offset, limit).execute()
     }
 
@@ -28,17 +28,17 @@ class UsersController : Endpoints() {
     }
 
     @Step("Get user by id={id}")
-    fun getUserById(token: String? = authHelper.getAdminToken(), id: Int): Response<CreateUserResponse> {
+    fun getUserById(token: String? = authHelper.getDefaultToken(), id: Int): Response<CreateUserResponse> {
         return users.getUserById(token, id).execute()
     }
 
     @Step("Update user by id={id}")
-    fun updateUserById(token: String? = authHelper.getAdminToken(), id: Int, body: UpdateRequest): Response<CreateUserResponse> {
+    fun updateUserById(token: String? = authHelper.getDefaultToken(), id: Int, body: UpdateRequest): Response<CreateUserResponse> {
         return users.putUserById(token, id, body).execute()
     }
 
     @Step("Delete user by id={id}")
-    fun deleteUserById(token: String? = authHelper.getAdminToken(), id: Int): Response<ResponseBody> {
+    fun deleteUserById(token: String? = authHelper.getDefaultToken(), id: Int): Response<ResponseBody> {
         return users.deleteUserById(token, id).execute()
     }
 }
