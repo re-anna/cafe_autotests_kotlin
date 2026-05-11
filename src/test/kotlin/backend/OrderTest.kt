@@ -1,17 +1,11 @@
 package backend
 
+import OrderStatus
 import backend.api.extension.ResponseExt.getAsObject
-import backend.api.extension.ResponseExt.getErrorAsObject
-import backend.api.models.ErrorResponse
 import backend.api.models.orders.CreateOrderRequest
 import backend.api.models.orders.UpdateOrderStatusRequest
 import backend.api.models.products.defaultProduct
-import backend.api.models.users.randomUser
-import backend.controllers.Controllers
-import frontend.components.popup.CreateUserPopup
-import frontend.components.popup.LogInPopup
 import frontend.helpers.BaseTest
-import frontend.pages.MainPage
 import infra.junit.TestContext
 import infra.junit.TestContext.token
 import io.kotest.matchers.shouldBe
@@ -49,9 +43,8 @@ class OrderTest: BaseTest() {
             products = emptyList()
         )
 
-        val response = orders.createOrder(body = orderRequest)
+        val response = orders.createOrder(token,orderRequest)
 
-        val error = response
     }
 
     @ParameterizedTest
