@@ -23,3 +23,8 @@ data class ErrorResponse(
             code = 401,
             reason = "The token is invalid."
         )
+
+        val emptyProductListInOrders = ErrorResponse(
+            code = 400,
+            reason = "products cannot be null or empty"
+        )

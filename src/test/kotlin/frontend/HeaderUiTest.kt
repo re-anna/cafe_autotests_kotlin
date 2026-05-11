@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EnumSource
-import java.lang.Thread.sleep
 
 @Tag("frontend")
 class HeaderUiTest: BaseUiTest() {
@@ -33,8 +32,6 @@ class HeaderUiTest: BaseUiTest() {
             .open()
             .header()
             .clickLink(link.urlName)
-
-        sleep(10000)
 
         url() shouldContain link.expectedUrl
     }

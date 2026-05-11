@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 
 @Feature("")
-@Story("frontend/products")
+@Story("frontend/e2e")
 @Tag("frontend")
 class ProductsTest: BaseUiTest() {
 

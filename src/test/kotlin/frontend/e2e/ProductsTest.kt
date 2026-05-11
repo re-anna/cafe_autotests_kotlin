@@ -1,7 +1,6 @@
-package frontend.products
+package frontend.e2e
 
 import backend.helpers.ProductsHelper
-import backend.controllers.Controllers
 import frontend.helpers.BaseUiTest
 import frontend.pages.ProductsPage
 import io.kotest.matchers.equals.shouldBeEqual
