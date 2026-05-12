@@ -23,7 +23,7 @@ class UserTests: BaseTest() {
     @DisplayName("Create user with valid data")
     fun createUser(){
         val actualUser = users.createUser(randomUser()).getAsObject()
-        val expectedUser = users.getUserById(token = token, id = actualUser.id)
+        val expectedUser = users.getUserById(token = token, id = actualUser.id).getAsObject()
 
         expectedUser shouldBeEqual actualUser
     }

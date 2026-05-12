@@ -32,14 +32,13 @@ class OrderTest: BaseTest() {
     @Test
     @DisplayName("Check creation of invalid order with empty products list")
     fun createInvalidOrderEmptyProducts() {
-        val product = products.createProduct(product = defaultProduct()).getAsObject()
-
         val orderRequest = CreateOrderRequest(
             TestContext.user.id,
             products = emptyList()
         )
 
         val response = orders.createOrder(token,orderRequest)
+        println(response)
     }
 
 }
