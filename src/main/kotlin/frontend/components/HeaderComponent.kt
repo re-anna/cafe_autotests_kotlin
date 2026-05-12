@@ -27,4 +27,6 @@ class HeaderComponent {
     @Step("Get cart popup")
     fun openCartPopup(): CartPopup =
         CartPopup()
+
+
 }

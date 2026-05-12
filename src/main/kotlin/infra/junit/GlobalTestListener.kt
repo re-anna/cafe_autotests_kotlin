@@ -7,6 +7,8 @@ import backend.controllers.Controllers
 import com.codeborne.selenide.Screenshots
 import com.codeborne.selenide.Selenide
 import config.Config
+import database.JDBCHelper
+import io.kotest.matchers.ints.shouldBeGreaterThan
 import io.qameta.allure.Attachment
 import org.junit.platform.engine.TestExecutionResult
 import org.junit.platform.launcher.TestExecutionListener
@@ -53,25 +55,23 @@ class GlobalTestListener : Controllers(), TestExecutionListener {
         println("|------ Test Plan Finished -----|")
         Selenide.closeWebDriver()
         println("|------ GarbageCollector -----|")
+
+        val jdbs = JDBCHelper()
+
         GarbageCollector.user.forEach { id ->
             users.deleteUserById(token = authHelper.getDefaultToken(), id = id)
                 .also { println("Deleted User: $id") }
         }
-//todo
-        /*GarbageCollector.orders.forEach { id ->
-            val deleteOeders = JDBCHelper().
-        }*/
+
+        GarbageCollector.orders.forEach { id ->
+            val deletedOrders = jdbs.deleteOrderById(id).also { println("Deleted order: $id") }
+            deletedOrders shouldBeGreaterThan 0
+        }
 
         GarbageCollector.products.forEach { id ->
             products.deleteProductById(token = authHelper.getDefaultToken(), id = id).also {
                 println("Deleted Product: $id")
             }
-            /*  user.getAllUsers(authHelper.getDefaultToken(), 1, 50).getAsObject().forEach { users ->
-                  if (users.email.contains("@autotest.com")) {
-                      user.deleteUserById(authHelper.getDefaultToken(), users.id)
-                          .also { println(" ${users.email} deleted") }
-                  }
-              }*/
         }
     }
 

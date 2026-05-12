@@ -43,7 +43,7 @@ class OrderController: Endpoints() {
 
     @Step("Get all orders by user id")
     fun getOrderByUserId(
-        token: String = authHelper.getDefaultToken(),
+        token: String,
         id: Int
     ): List<CreateOrderResponse> {
         return orders.getOrderByUserId(token, id).execute().getAsObject()

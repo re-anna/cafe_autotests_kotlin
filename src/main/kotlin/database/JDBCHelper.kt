@@ -13,6 +13,15 @@ class JDBCHelper {
         Config.get.dbPassword
         )
 
+    fun deleteOrderById(orderId: Int): Int =
+        client.use { connection ->
+            connection.prepareStatement("DELETE FROM table orders WHERE id = ?").use {
+                statement ->
+                statement.setInt(1, orderId)
+                statement.executeUpdate()
+            }
+        }
+
     fun getProducts(): List<Product> {
         val products = mutableListOf<Product>()
 

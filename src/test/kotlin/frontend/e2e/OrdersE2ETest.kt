@@ -5,14 +5,13 @@ import backend.api.extension.ResponseExt.getAsObject
 import backend.api.models.orders.CreateOrderRequest
 import backend.api.models.orders.UpdateOrderStatusRequest
 import backend.api.models.products.defaultProduct
-import frontend.components.popup.CreateUserPopup
-import frontend.components.popup.LogInPopup
+import frontend.components.popup.OrderPopup
+import frontend.helpers.AuthHelperUI
 import frontend.helpers.BaseUiTest
 import frontend.pages.MainPage
 import frontend.pages.OrdersPage
 import infra.junit.TestContext
 import infra.junit.TestContext.token
-import io.kotest.matchers.ints.shouldBeGreaterThan
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Tag
@@ -43,32 +42,17 @@ class OrdersE2ETest : BaseUiTest() {
         val update = orders.updateOrderById(token,order.id, UpdateOrderStatusRequest(status.value))
         update.orderStatus shouldBe status.value
 
-        MainPage()
-            .open()
-            .header()
-            .clickLink("Join")
-        CreateUserPopup()
-            //todo отдебажить
-            .clickLoginLink()
-        //нужен хелпер или контроллер чтобы прям разом логиниться и куда-то код засунуть т к каждый раз будет открываться
-        LogInPopup()
-            .putEmailAndPassword(TestContext.creds.email, TestContext.creds.password)
-            .clickLoginBtn()
+        AuthHelperUI.loginAsCurrentTestUser()
 
         val uiOrder = OrdersPage().open().findOrder(order.id)
-        //как сравнить модели статус
         uiOrder.status shouldBe status.value
-
     }
 
     @Test
     @DisplayName("Create order via UI and verify via backend")
     fun createOrderUiBack(){
 
-        val ordersBefore = orders.getOrderByUserId(
-            token,
-            TestContext.user.id
-        )
+        AuthHelperUI.loginAsCurrentTestUser()
 
         val addFirstProduct = MainPage()
             .open()
@@ -84,14 +68,16 @@ class OrdersE2ETest : BaseUiTest() {
             .openCartPopup()
             .createOrder()
 
-        val ordersAfter = orders.getOrderByUserId(
+        val orderIdUi = OrderPopup().getOrderId()
+        val orderStatusUi = OrderPopup().getOrderStatus()
+
+        val ordersAfter = orders.getOrderById(
             token,
-            TestContext.user.id
+            orderIdUi
         )
-        ordersAfter.size shouldBeGreaterThan ordersBefore.size
 
-        //ordersAfter.products.map {}
-
+        ordersAfter.id shouldBe orderIdUi
+        ordersAfter.orderStatus shouldBe orderStatusUi
     }
 
 

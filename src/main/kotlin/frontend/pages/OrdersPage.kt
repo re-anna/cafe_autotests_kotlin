@@ -7,6 +7,7 @@ import com.codeborne.selenide.Selenide.elements
 import com.codeborne.selenide.SelenideElement
 import frontend.helpers.Wrappers.byDataTestGroup
 import frontend.helpers.extractInt
+import frontend.helpers.extractStatus
 import frontend.helpers.priceToCents
 
 import io.qameta.allure.Step
@@ -46,7 +47,7 @@ class OrdersPage  {
         return orderCards.map { order ->
             OrderData(
                 orderId = orderId(order).text.extractInt(),
-                status = status(order).text(),
+                status = status(order).text().extractStatus(),
                 productName = productsInOrder(order).text(),
                 qty = productQty(order).text(),
                 unitPrice = unitPrice(order).text.priceToCents(),
