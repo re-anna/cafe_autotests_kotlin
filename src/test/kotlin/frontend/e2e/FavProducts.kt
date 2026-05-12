@@ -31,6 +31,7 @@ class FavProducts: BaseUiTest() {
         )
         ).getAsObject()
 
+        //todo отдебажить
         val popularList = MainPage()
             .open()
             .getPopularProducts()

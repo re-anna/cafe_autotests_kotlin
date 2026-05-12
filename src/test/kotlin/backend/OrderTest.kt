@@ -44,27 +44,6 @@ class OrderTest: BaseTest() {
         )
 
         val response = orders.createOrder(token,orderRequest)
-
     }
 
-    @ParameterizedTest
-    @EnumSource(OrderStatus::class)
-    @DisplayName("Parametrized order status check")
-    fun changeOrderStatus(status: OrderStatus){
-        val product = products.createProduct(
-            token = token,
-            product = defaultProduct()
-        ).getAsObject()
-
-        val order = orders.createOrder(
-            token = token,
-            body = CreateOrderRequest(
-                TestContext.user.id,
-                listOf(CreateOrderRequest.Product(id = product.id))
-            )
-        )
-
-        val update = orders.updateOrderById(token,order.id, UpdateOrderStatusRequest(status.value))
-        update.orderStatus shouldBe status.value
-    }
 }

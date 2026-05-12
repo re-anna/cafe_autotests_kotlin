@@ -7,13 +7,13 @@ import frontend.helpers.priceToCents
 import frontend.models.ProductUi
 
 data class ProductItem(
-    val image: SelenideElement,
+    val image: SelenideElement?,
     val name: String,
     val description: String,
     val priceCents: Int,
-    val btnDecrement: SelenideElement,
-    var quantity: Int,
-    val btnIncrement: SelenideElement
+    val btnDecrement: SelenideElement?,
+    var quantity: Int?,
+    val btnIncrement: SelenideElement?
 )
 
 class ProductItems(private val items: ElementsCollection) {
