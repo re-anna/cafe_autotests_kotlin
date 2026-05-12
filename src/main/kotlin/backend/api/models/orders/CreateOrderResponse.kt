@@ -2,7 +2,7 @@ package backend.api.models.orders
 
 data class CreateOrderResponse(
     val id: Int,
-    val userId: Int?,
+    val userId: Int,
     val orderStatus: String,
     val products: List<Product>,
     val totalAmount: Double,

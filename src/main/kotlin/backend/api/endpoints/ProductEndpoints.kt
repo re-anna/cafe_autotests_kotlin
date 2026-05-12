@@ -16,10 +16,9 @@ interface ProductsEndpoints {
     @GET("products")
     fun getProducts(): Call<List<CreateProductsResponse>>
 
-    //поставили не int а any чтобы можно было поэксперементировать со стрингой и т д
     @GET("products/{id}")
     fun getProductById(
-        @Path("id") id: Any
+        @Path("id") id: Int
     ): Call<CreateProductsResponse>
 
     @POST("products/create")
@@ -33,5 +32,4 @@ interface ProductsEndpoints {
         @Header(Headers.AUTHORIZATION) token: String,
         @Path("id") id: Any
     ): Call<ResponseBody>
-
 }

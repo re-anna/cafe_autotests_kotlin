@@ -26,16 +26,13 @@ class ProductsTest: BaseUiTest() {
     @Test
     @DisplayName("Check popular products exist")
     fun testPopularProductsExist() {
-        // Precondition
         val body = CreateProductsRequest(name = "Coffee Black", description = "Coffee without milk", price = 2.5)
         val product = controllers.products.createProduct(product = body).getAsObject()
 
-        // Steps
         val popularList = MainPage()
             .open()
             .getPopularProducts()
 
-        // Assertions
         popularList.size shouldBe 1
         popularList.first().name shouldBe product.name
     }

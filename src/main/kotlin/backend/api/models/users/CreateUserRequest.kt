@@ -1,6 +1,6 @@
 package backend.api.models.users
 
-import kotlin.random.Random
+import java.util.UUID
 
 data class CreateUserRequest(
     val username: String,
@@ -11,5 +11,5 @@ data class CreateUserRequest(
 fun randomUser() = CreateUserRequest(
     username = "random",
     password = "user",
-    email = "random-${Random.nextInt(10000)}@autotest.com"
+    email = "random-${System.currentTimeMillis()}-${UUID.randomUUID()})}@autotest.com"
 )

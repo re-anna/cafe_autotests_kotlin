@@ -1,6 +1,6 @@
 package frontend.e2e
 
-import OrderStatus
+import OrderStatusEnum
 import backend.api.extension.ResponseExt.getAsObject
 import backend.api.models.orders.CreateOrderRequest
 import backend.api.models.orders.UpdateOrderStatusRequest
@@ -23,9 +23,9 @@ import org.junit.jupiter.params.provider.EnumSource
 class OrdersE2ETest : BaseUiTest() {
 
     @ParameterizedTest
-    @EnumSource(OrderStatus::class)
+    @EnumSource(OrderStatusEnum::class)
     @DisplayName("Parametrized order status check")
-    fun changeOrderStatus(status: OrderStatus){
+    fun changeOrderStatus(status: OrderStatusEnum){
         val product = products.createProduct(
             token = token,
             product = defaultProduct()

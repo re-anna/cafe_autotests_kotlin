@@ -1,9 +1,7 @@
 package backend
 
-import OrderStatus
 import backend.api.extension.ResponseExt.getAsObject
 import backend.api.models.orders.CreateOrderRequest
-import backend.api.models.orders.UpdateOrderStatusRequest
 import backend.api.models.products.defaultProduct
 import frontend.helpers.BaseTest
 import infra.junit.TestContext
@@ -12,8 +10,6 @@ import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.EnumSource
 
 @Tag("backend")
 class OrderTest: BaseTest() {

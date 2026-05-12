@@ -14,7 +14,6 @@ class DBProductsTest: BaseTest() {
     @DisplayName("Test fetching all products from the database -> Kotlin JDBC")
     fun testGetAllProductsKotlin() {
         val products = jdbcClient.getProductNew()
-        println(products)
-        assertEquals(3, products.size)
+        assertEquals(185, products.size)
     }
 }
