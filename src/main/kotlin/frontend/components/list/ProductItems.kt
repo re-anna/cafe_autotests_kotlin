@@ -4,7 +4,6 @@ import com.codeborne.selenide.ElementsCollection
 import com.codeborne.selenide.SelenideElement
 import frontend.helpers.Wrappers.byDataTestGroup
 import frontend.helpers.priceToCents
-import frontend.models.ProductUi
 
 data class ProductItem(
     val image: SelenideElement?,
@@ -28,15 +27,6 @@ class ProductItems(private val items: ElementsCollection) {
                 btnIncrement = card.find(byDataTestGroup("product-card-increment")),
                 quantity = card.find(byDataTestGroup("product-card-qty")).text.toInt(),
                 btnDecrement = card.find(byDataTestGroup("product-card-decrement"))
-            )
-        }
-
-    fun productUiModel(): List<ProductUi> =
-        items.map { card ->
-            ProductUi(
-                name = card.find(byDataTestGroup("product-card-name")).text,
-                description = card.find(byDataTestGroup("product-card-description")).text,
-                priceCents = card.find(byDataTestGroup("product-card-price")).text.priceToCents()
             )
         }
 }

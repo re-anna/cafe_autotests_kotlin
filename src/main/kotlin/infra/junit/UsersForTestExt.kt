@@ -12,9 +12,13 @@ class UsersForTestExt: Controllers(), BeforeEachCallback {
     private val  authHelper = AuthHelper()
 
     override fun beforeEach(context: ExtensionContext?) {
-        val newUser = users.createUser(randomUser()).getAsObject()
-        val token = authHelper.getAuthorizationToken(email = newUser.email, password = "user")
+        val req = randomUser()
+        val newUser = users.createUser(req).getAsObject()
+        val token = authHelper.getAuthorizationToken(req.email, req.password)
 
-        TestContext.set(newUser,token)
+        TestContext.set(
+            newUser,
+            token,
+            creds = Credentials(req.email,req.password))
     }
 }

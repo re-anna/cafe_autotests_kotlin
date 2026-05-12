@@ -4,10 +4,8 @@ import backend.helpers.AuthHelper
 import backend.helpers.GarbageCollector
 import backend.helpers.ProductsHelper
 import backend.controllers.Controllers
-import com.codeborne.selenide.Configuration
 import com.codeborne.selenide.Screenshots
 import com.codeborne.selenide.Selenide
-import frontend.helpers.DriverProvider
 import config.Config
 import io.qameta.allure.Attachment
 import org.junit.platform.engine.TestExecutionResult
@@ -22,7 +20,7 @@ class GlobalTestListener : Controllers(), TestExecutionListener {
     override fun testPlanExecutionStarted(testPlan: TestPlan) {
         println("|------ Test Plan Started -----|")
         println("Initializing Configurations...").also { Config.get }
-        println("Initializing Selenide WebDriver...").also { Configuration.browser = DriverProvider::class.java.name }
+       // println("Initializing Selenide WebDriver...").also { Configuration.browser = DriverProvider::class.java.name }
 
         val tag = System.getProperty("TAG")
         if (tag == "frontend" || tag == "e2e") {

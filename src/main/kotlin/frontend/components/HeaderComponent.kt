@@ -1,5 +1,6 @@
 package frontend.components
 
+import com.codeborne.selenide.Condition.visible
 import com.codeborne.selenide.Selenide.elements
 import frontend.components.popup.CartPopup
 import frontend.helpers.Wrappers.byDataTestGroup
@@ -13,7 +14,7 @@ class HeaderComponent {
 
     @Step("Click on {name} link")
     fun clickLink(name: String):HeaderComponent{
-        links.first{ it.text.contains(name)}.click()
+        links.first{ it.text.contains(name)}.shouldBe(visible).click()
         return this
     }
 

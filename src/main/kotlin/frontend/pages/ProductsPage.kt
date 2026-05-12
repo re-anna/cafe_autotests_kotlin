@@ -6,11 +6,11 @@ import com.codeborne.selenide.Selenide
 import com.codeborne.selenide.Selenide.element
 import com.codeborne.selenide.Selenide.elements
 import com.codeborne.selenide.SelenideElement
+import frontend.components.list.ProductItem
 import frontend.components.list.ProductItems
 import frontend.helpers.Wrappers.byDataTestGroup
 import frontend.helpers.Wrappers.byDataTestId
 import frontend.helpers.priceToCents
-import frontend.models.ProductUi
 import io.qameta.allure.Step
 
 data class ProductData(
@@ -50,8 +50,8 @@ class ProductsPage {
         }
     }
     @Step("Get list of all products from page as objects")
-    fun getProductsAsObjects(): List<ProductUi> =
-        ProductItems(cards).productUiModel()
+    fun getProductsAsObjects(): List<ProductItem> =
+        ProductItems(cards).getProducts()
 
     @Step("Count products with {word}")
     fun countProductsWithWord(word: String): Int =

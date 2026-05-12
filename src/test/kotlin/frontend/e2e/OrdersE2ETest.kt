@@ -50,13 +50,14 @@ class OrdersE2ETest : BaseUiTest() {
         CreateUserPopup()
             //todo отдебажить
             .clickLoginLink()
+        //нужен хелпер или контроллер чтобы прям разом логиниться и куда-то код засунуть т к каждый раз будет открываться
         LogInPopup()
-            //где взять пароль
-            .putEmailAndPassword(TestContext.user.email, TestContext.user.password)
+            .putEmailAndPassword(TestContext.creds.email, TestContext.creds.password)
             .clickLoginBtn()
 
-        OrdersPage().open().getOrdersInfo()
+        val uiOrder = OrdersPage().open().findOrder(order.id)
         //как сравнить модели статус
+        uiOrder.status shouldBe status.value
 
     }
 
@@ -69,14 +70,11 @@ class OrdersE2ETest : BaseUiTest() {
             TestContext.user.id
         )
 
-        MainPage()
-            .open()
-            .header()
-
-        //отдебажить
         val addFirstProduct = MainPage()
             .open()
             .getPopularProducts()
+            .first()
+        addFirstProduct.btnIncrement!!.click()
 
 
         MainPage()
@@ -91,6 +89,9 @@ class OrdersE2ETest : BaseUiTest() {
             TestContext.user.id
         )
         ordersAfter.size shouldBeGreaterThan ordersBefore.size
+
+        //ordersAfter.products.map {}
+
     }
 
 

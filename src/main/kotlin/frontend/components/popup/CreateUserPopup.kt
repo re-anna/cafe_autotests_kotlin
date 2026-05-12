@@ -37,8 +37,8 @@ class CreateUserPopup {
     fun getErrorText(): String = createUserError.text()
 
     @Step("Go to login popup")
-    fun clickLoginLink(): CreateUserPopup{
+    fun clickLoginLink(): LogInPopup{
         createLogIn.click()
-        return this
+        return LogInPopup()
     }
 }

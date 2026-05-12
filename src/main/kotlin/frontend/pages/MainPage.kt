@@ -5,10 +5,10 @@ import com.codeborne.selenide.Selenide.element
 import com.codeborne.selenide.Selenide.elements
 import com.codeborne.selenide.SelenideElement
 import frontend.components.HeaderComponent
+import frontend.components.list.ProductItem
 import frontend.components.list.ProductItems
 import frontend.helpers.Wrappers.byDataTestGroup
 import frontend.helpers.Wrappers.byDataTestId
-import frontend.models.ProductUi
 import io.qameta.allure.Step
 
 class MainPage {
@@ -21,5 +21,5 @@ class MainPage {
     fun header(): HeaderComponent = header
 
     @Step("Get popular products list")
-    fun getPopularProducts(): List<ProductUi> = ProductItems(listPopularProducts).productUiModel()
+    fun getPopularProducts(): List<ProductItem> = ProductItems(listPopularProducts).getProducts()
 }

@@ -3,17 +3,13 @@ package frontend.pages
 import com.codeborne.selenide.CollectionCondition.sizeGreaterThan
 import com.codeborne.selenide.ElementsCollection
 import com.codeborne.selenide.Selenide
-import com.codeborne.selenide.Selenide.element
 import com.codeborne.selenide.Selenide.elements
 import com.codeborne.selenide.SelenideElement
-import frontend.components.list.ProductItems
 import frontend.helpers.Wrappers.byDataTestGroup
-import frontend.helpers.Wrappers.byDataTestId
+import frontend.helpers.extractInt
 import frontend.helpers.priceToCents
-import frontend.models.ProductUi
-import io.kotest.matchers.collections.shouldHaveSize
+
 import io.qameta.allure.Step
-import kotlin.String
 
 data class OrderData(
     val orderId: Int,
@@ -49,7 +45,7 @@ class OrdersPage  {
 
         return orderCards.map { order ->
             OrderData(
-                orderId = orderId(order).text.toInt(),
+                orderId = orderId(order).text.extractInt(),
                 status = status(order).text(),
                 productName = productsInOrder(order).text(),
                 qty = productQty(order).text(),
@@ -60,6 +56,7 @@ class OrdersPage  {
         }
     }
 
-
-
+    fun findOrder(orderId: Int): OrderData =
+        getOrdersInfo().firstOrNull{ it.orderId == orderId}
+            ?:error("Order with id $orderId is not found")
 }
