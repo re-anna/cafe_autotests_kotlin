@@ -31,7 +31,7 @@ class HeaderUiTest: BaseUiTest() {
         MainPage()
             .open()
             .header()
-            .clickLink(link.urlName)
+            .clickLinkAndWaitUrl(link.urlName, link.expectedUrl)
 
         url() shouldContain link.expectedUrl
     }

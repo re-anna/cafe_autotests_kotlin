@@ -1,6 +1,5 @@
 package backend.helpers
 
-import backend.api.models.auth.defaultAdmin
 import backend.controllers.Controllers
 import backend.api.extension.ResponseExt.getAsObject
 import backend.api.extension.ResponseExt.toBearer
@@ -17,5 +16,4 @@ class AuthHelper: Controllers() {
     fun getAuthorizationToken(email: String, password: String): String {
         return auth.login(email,password).getAsObject().accessToken.toBearer()
     }
-
 }

@@ -13,7 +13,7 @@ import retrofit2.http.Path
 
 interface ProductsEndpoints {
 
-    @GET("products")
+    @GET("products/")
     fun getProducts(): Call<List<CreateProductsResponse>>
 
     @GET("products/{id}")

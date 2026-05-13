@@ -1,15 +1,13 @@
 package frontend.components
 
 import com.codeborne.selenide.Condition.visible
-import com.codeborne.selenide.Selenide
 import com.codeborne.selenide.Selenide.elements
+import com.codeborne.selenide.Selenide.webdriver
 import com.codeborne.selenide.WebDriverConditions.urlContaining
 import frontend.components.popup.CartPopup
 import frontend.helpers.Wrappers.byDataTestGroup
 import frontend.pages.ProductsPage
 import io.qameta.allure.Step
-import java.util.concurrent.locks.Condition
-import kotlin.coroutines.Continuation
 
 class HeaderComponent {
     private val links get() = elements(byDataTestGroup("nav-link"))
@@ -24,6 +22,13 @@ class HeaderComponent {
         return this
     }
 
+    @Step("Click on {name} link and check link")
+    fun clickLinkAndWaitUrl(name: String, expectedUrl: String): HeaderComponent{
+        clickLink(name)
+        webdriver().shouldHave(urlContaining(expectedUrl))
+        return this
+    }
+
     @Step("Go to Products page")
     fun goToProducts(): ProductsPage {
         clickLink("Products")
@@ -33,6 +38,4 @@ class HeaderComponent {
     @Step("Get cart popup")
     fun openCartPopup(): CartPopup =
         CartPopup()
-
-
 }

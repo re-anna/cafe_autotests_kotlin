@@ -23,16 +23,15 @@ class ProductsTest: BaseUiTest() {
             .open()
             .getProductsAsObjects()
 
-
         products.forEachIndexed { index, item ->
             item.name shouldBe listOfProducts[index].name
         }
     }
 
     @Test
-    @DisplayName("Create 'COFFEE' products via back and then check them on frontend and backend")
+    @DisplayName("Create 'Chockolate' products via back and then check them on frontend and backend")
     fun checkCreatedItems(){
-        val word = "COFFEE"
+        val word = "Chockolate"
         productsHelper.ensureProductsWithWordExists(word = word, minCount = 5)
 
         val frontendCoffeeCount = ProductsPage()

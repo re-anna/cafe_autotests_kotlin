@@ -1,7 +1,5 @@
 package frontend
 
-import backend.api.models.users.randomUser
-import frontend.components.HeaderComponent
 import frontend.components.popup.CreateUserPopup
 import frontend.helpers.BaseUiTest
 import frontend.pages.MainPage

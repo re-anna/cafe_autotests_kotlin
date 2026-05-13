@@ -7,7 +7,9 @@ import backend.api.extension.ResponseExt.getAsObject
 import backend.api.models.orders.CreateOrderRequest
 import backend.helpers.AuthHelper
 import backend.helpers.GarbageCollector
+import infra.junit.TestContext
 import io.qameta.allure.Step
+import retrofit2.Response
 
 class OrderController: Endpoints() {
 
@@ -15,7 +17,7 @@ class OrderController: Endpoints() {
 
     @Step("Create order")
     fun createOrder(
-        token: String = authHelper.getDefaultToken(),
+        token: String = TestContext.token,
         body: CreateOrderRequest
     ): CreateOrderResponse {
         return orders.postOrderCreate(token,body)
@@ -24,9 +26,17 @@ class OrderController: Endpoints() {
             .also { GarbageCollector.orders.add(it.id) }
     }
 
+    @Step("Create order")
+    fun createOrderRaw(
+        token: String = TestContext.token,
+        body: CreateOrderRequest
+    ): Response<CreateOrderResponse> =
+        orders.postOrderCreate(token,body).execute()
+
+
     @Step("Get all orders")
     fun getAllOrders(
-        token: String = authHelper.getDefaultToken(),
+        token: String = TestContext.token,
         offset: Int = 0,
         limit: Int = 100
     ): List<CreateOrderResponse> {
@@ -35,7 +45,7 @@ class OrderController: Endpoints() {
 
     @Step("Get order by id")
     fun getOrderById(
-        token: String = authHelper.getDefaultToken(),
+        token: String = TestContext.token,
         id: Int
     ): CreateOrderResponse{
         return orders.getOrderById(token, id).execute().getAsObject()
@@ -51,7 +61,7 @@ class OrderController: Endpoints() {
 
     @Step("Change order status")
     fun updateOrderById(
-        token: String = authHelper.getDefaultToken(),
+        token: String = TestContext.token,
         id: Int,
         body: UpdateOrderStatusRequest
     ): CreateOrderResponse {

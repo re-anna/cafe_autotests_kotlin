@@ -11,5 +11,5 @@ data class CreateUserRequest(
 fun randomUser() = CreateUserRequest(
     username = "random",
     password = "user",
-    email = "random-${System.currentTimeMillis()}-${UUID.randomUUID()})}@autotest.com"
+    email = "random-${System.currentTimeMillis()}-${UUID.randomUUID()}@autotest.com"
 )

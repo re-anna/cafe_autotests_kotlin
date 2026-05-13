@@ -1,11 +1,15 @@
 package backend
 
 import backend.api.extension.ResponseExt.getAsObject
+import backend.api.extension.ResponseExt.getErrorAsObject
+import backend.api.models.ErrorResponse
+import backend.api.models.emptyProductListInOrders
 import backend.api.models.orders.CreateOrderRequest
 import backend.api.models.products.defaultProduct
 import frontend.helpers.BaseTest
 import infra.junit.TestContext
 import infra.junit.TestContext.token
+import io.kotest.matchers.equals.shouldBeEqual
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Tag
@@ -37,8 +41,9 @@ class OrderTest: BaseTest() {
             products = emptyList()
         )
 
-        val response = orders.createOrder(token,orderRequest)
-        println(response)
+        val error = orders.createOrderRaw(token,orderRequest).getErrorAsObject<ErrorResponse>()
+
+        error shouldBeEqual emptyProductListInOrders
     }
 
 }

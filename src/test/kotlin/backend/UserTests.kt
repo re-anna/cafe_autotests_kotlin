@@ -8,6 +8,7 @@ import backend.api.extension.ResponseExt.checkIsSuccessful
 import backend.api.extension.ResponseExt.getAsObject
 import backend.api.extension.ResponseExt.getErrorAsObject
 import frontend.helpers.BaseTest
+import infra.junit.TestContext
 import infra.junit.TestContext.token
 import io.kotest.matchers.equals.shouldBeEqual
 import io.kotest.matchers.ints.shouldBeGreaterThan
@@ -31,8 +32,7 @@ class UserTests: BaseTest() {
     @Test
     @DisplayName("Delete valid user should return 200")
     fun deleteDefaultUser(){
-        val actualUser = users.createUser(randomUser()).getAsObject()
-        val delete = users.deleteUserById(token = token, id = actualUser.id)
+        val delete = users.deleteUserById(token = token, id = TestContext.user.id)
 
         delete.code() shouldBe 200
     }
@@ -40,12 +40,11 @@ class UserTests: BaseTest() {
     @Test
     @DisplayName("Update phone number")
     fun updatePhoneNumber(){
-        val createdUser = users.createUser(randomUser()).getAsObject()
         val newPhone = "89998988998"
 
-        users.updateUserById(token,createdUser.id, UpdateRequest(phoneNumber = newPhone)).getAsObject()
+        users.updateUserById(token, TestContext.user.id, UpdateRequest(phoneNumber = newPhone)).getAsObject()
 
-        val updatedUser = users.getUserById(token,createdUser.id).getAsObject()
+        val updatedUser = users.getUserById(token, TestContext.user.id).getAsObject()
 
         updatedUser.phoneNumber shouldBeEqual newPhone
     }
@@ -53,15 +52,14 @@ class UserTests: BaseTest() {
     @Test
     @DisplayName("Update full user model with valid data")
     fun updateFullUserData(){
-        val newUser = users.createUser(randomUser()).getAsObject()
         val updateRequest = UpdateRequest(
-            "updated-${newUser.username}",
+            "updated-${TestContext.user.username}",
             "updated-password",
-            "updated-${newUser.email}",
+            "updated-${TestContext.user.email}",
             "899888888}"
         )
 
-        val updatedUser = users.updateUserById(token, id = newUser.id, body = updateRequest).getAsObject()
+        val updatedUser = users.updateUserById(token, id = TestContext.user.id, body = updateRequest).getAsObject()
         val login = auth.login(updateRequest.email!!, updateRequest.password!!).getAsObject()
 
         login.accessToken.length shouldBeGreaterThan 10
@@ -73,11 +71,10 @@ class UserTests: BaseTest() {
     @Test
     @DisplayName("Update partial user model with valid data")
     fun updatePartialUserData(){
-        val newUser = users.createUser(randomUser()).getAsObject()
         val updateRequest = UpdateRequest( password ="UpdatePassword")
-        users.updateUserById(token,newUser.id,updateRequest).checkIsSuccessful()
+        users.updateUserById(token, TestContext.user.id,updateRequest).checkIsSuccessful()
 
-        val login = auth.login(newUser.email, updateRequest.password!!).getAsObject()
+        val login = auth.login(TestContext.user.email, updateRequest.password!!).getAsObject()
 
         login.accessToken.length shouldBeGreaterThan 10
     }

@@ -5,8 +5,6 @@ import backend.api.models.emptyCredentials
 import backend.api.models.invalidCredentials
 import backend.api.extension.ResponseExt.getAsObject
 import backend.api.extension.ResponseExt.getErrorAsObject
-import backend.api.models.auth.defaultAdmin
-import backend.api.models.users.randomUser
 import frontend.helpers.BaseTest
 import infra.junit.TestContext
 import io.kotest.matchers.comparables.shouldBeGreaterThan
@@ -21,7 +19,7 @@ class LoginTest : BaseTest() {
     @Test
     @DisplayName("Login with valid credentials should return access token")
     fun testLoginWithValidCredentials() {
-        val response = auth.login(defaultAdmin.email,defaultAdmin.password).getAsObject()
+        val response = auth.login(TestContext.creds.email, TestContext.creds.password).getAsObject()
 
         response.accessToken.length shouldBeGreaterThan 10
         response.refreshToken.length shouldBeGreaterThan 10

@@ -38,7 +38,6 @@ object Config {
             dbUrl = properties.required("dbUrl"),
             dbUsername = properties.required("dbUsername"),
             dbPassword = properties.required("dbPassword")
-
         )
     }
 }

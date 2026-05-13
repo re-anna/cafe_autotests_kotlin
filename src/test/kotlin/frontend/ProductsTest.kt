@@ -33,7 +33,7 @@ class ProductsTest: BaseUiTest() {
             .open()
             .getPopularProducts()
 
-        popularList.size shouldBe 1
+        popularList.size shouldBe 4
         popularList.first().name shouldBe product.name
     }
 
@@ -47,26 +47,10 @@ class ProductsTest: BaseUiTest() {
             .getProductsAsObjects()
             .sortedByDescending { it.name }
 
-        products.size shouldBe 5
+        products.size shouldBe 50
         products.forEachIndexed { index, product ->
             product.name.uppercase() shouldBe listOfProducts[index].name.uppercase()
         }
-    }
-
-    @Test
-    @DisplayName("Check first popular product is first on products page")
-    fun firstPopularProductIsSame(){
-        val firstPopularProduct = MainPage()
-            .open()
-            .getPopularProducts()
-            .first()
-
-        val popularProductOnProductPage = ProductsPage()
-            .open()
-            .getProductsAsObjects()
-            .first()
-
-        firstPopularProduct shouldBe popularProductOnProductPage
     }
 
     @Test

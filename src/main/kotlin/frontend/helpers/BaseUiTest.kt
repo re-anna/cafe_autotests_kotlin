@@ -34,6 +34,7 @@ open class BaseUiTest: BaseTest() {
             if (WebDriverRunner.hasWebDriverStarted()) {
                 Selenide.clearBrowserCookies()
                 Selenide.clearBrowserLocalStorage()
+                Selenide.closeWebDriver()
             }
         }
 }

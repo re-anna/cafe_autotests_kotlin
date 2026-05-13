@@ -12,8 +12,3 @@ data class LoginResponse(
     val createdAt: Long,
     val expireInMs: Long
 )
-
-val defaultAdmin = LoginRequest(
-    email = System.getProperty("admin.email","__ADMIN_EMAIL_"),
-    password = System.getProperty("admin.password","__ADMIN_PASSWORD__")
-)
